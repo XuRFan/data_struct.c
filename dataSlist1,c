@@ -1,0 +1,48 @@
+# data_struct.c
+#include"data.h"
+int  BuySlistNode(SlistDatatype x)
+{
+	SlistNode* newNode = (SlistNode*)malloc(sizeof(SlistNode));//动态开辟一个数字的空间可以根据需求设置
+	if (newNode == NULL)
+	{
+		printf("申请失败\n");
+		exit(-1);
+	}
+	newNode->data = x;//数据
+	newNode->next = NULL;//下一个数字的地址置空
+	return newNode;
+}
+
+void Slistpushback(SlistNode** pphead, SlistDatatype x)
+{
+	
+	
+	if (*pphead == NULL)//首次录入值之前是空指针
+	{
+		SlistNode* newNode = BuySlistNode(x);//开辟空间赋值给空指针
+		*pphead = newNode;
+	}
+	else
+	{
+
+		SlistNode* tail = *pphead;//如果存在就执行找尾
+		while (tail->next != NULL)
+		{
+			tail = tail->next;//不断寻找下一个数字的地址直到停止
+		}
+		SlistNode* newNode = BuySlistNode(x);
+		tail->next = newNode;//将newNode的地址给结尾处
+	}
+		
+}
+void Slistprint(SlistNode* phead)
+{
+	SlistNode* cur = phead;
+	while (cur != NULL)
+	{
+		printf("%d->", cur->data);//将执行完之后的程序进行打印
+		cur = cur->next;//每次打印都进行链式指向另一个地址
+	}
+	printf("NULL");
+	printf("\n");
+}
